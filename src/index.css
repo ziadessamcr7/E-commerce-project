@@ -1,13 +1,174 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+Expanded:wght@300&display=swap');
+
+:root {
+  --main-color: #0aad0a;
+  --light-color: #f0f3f2;
+  --shadow: rgba(145, 158, 171, .2) 0px 2px 4px -1px, rgba(145, 158, 171, .14) 0px 4px 5px 0px, rgba(145, 158, 171, .12) 0px 1px 10px 0px;
+  --font-family: 'Encode Sans Expanded', sans-serif;
+  --rating-color: #ffc908;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.form-btn {
+  background-color: var(--main-color);
+  color: #fff;
+}
+
+/* body {
+  font-family: var(--font-family) !important;
+  background-image: url(../src/assets/images/light-patten.svg);
+
+} */
+
+.rating-color {
+  color: var(--rating-color);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+a,
+a:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.product:hover {
+  box-shadow: var(--shadow);
+  border: solid 1px var(--main-color);
+}
+
+.product .btn {
+  transition: transform 1s, opacity 0.5s;
+  transform: translateY(100%);
+  opacity: 0;
+}
+
+.product:hover .btn {
+  opacity: 1;
+  transform: translateY(0%);
+
+}
+
+.font-sm {
+  font-size: 14px;
+}
+
+.text-main {
+  color: var(--main-color);
+}
+
+.bg-main {
+  background-color: var(--main-color) !important;
+}
+
+.bg-main-light {
+  background-color: var(--light-color) !important;
+}
+
+img {
+  object-fit: cover;
+  object-position: 100%
+}
+
+img.cat {
+  height: 150px !important;
+  object-fit: cover;
+}
+
+
+.loading {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(145, 158, 171, .2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.parent {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+
+span.cart {
+  z-index: 9999 !important;
+  top: -3%;
+  left: 45%;
+}
+
+
+
+
+
+
+
+
+.navbar-nav .nav-link.active {
+
+  background-color: rgb(175, 174, 174);
+  border-radius: 10px;
+  /* margin-left: 15px; */
+
+}
+
+.slick-prev:before,
+.slick-next:before {
+  color: rgb(172, 169, 175);
+}
+
+a,
+a:hover {
+  text-decoration: none;
+}
+
+#products,
+#productDetails,
+#loading-icon,
+#brands,
+#categories,
+#profile,
+#login,
+#register,
+#cart,
+#wishlist,
+#payment,
+#allorders,
+#Home,
+#Forget-pass,
+#Reset-code,
+#reset-password {
+  padding-top: 80px;
+}
+
+#loading-layer {
+  background-color: rgba(255, 255, 255, 0.7);
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* z-index: 11; */
+}
+
+.Big-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba(145, 158, 171, .9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  overflow: auto;
 }
