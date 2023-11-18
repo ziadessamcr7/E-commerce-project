@@ -10,6 +10,9 @@ export default function Cart() {
 
     const [Loading, setLoading] = useState(false)
 
+    const [buffer, setBuffer] = useState(false)
+
+
     if (Loading === true) {
         return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
             <RotatingLines
@@ -56,11 +59,19 @@ export default function Cart() {
 
 
     async function updateElementCounter(id, count) {
+
         const res = await updateProduct(id, count)
+
+        res.data.products.map(ele => {
+            if (ele.count === 0) {
+                removeProduct(ele.product._id)
+            }
+        })
 
         if (res.status === 'success') {
             toast.success('updated successfully')
         }
+
     }
 
 
@@ -86,7 +97,7 @@ export default function Cart() {
                             <div className="col-md-2">
                                 <div className='d-flex align-items-center'>
                                     <button onClick={() => { updateElementCounter(product.product.id, product.count + 1) }} className='btn btn-outline-success'>+</button>
-                                    {updateProduct ? <span className='mx-2'>{product.count}</span> : 'hi'}
+                                    {updateProduct ? <span className='mx-2' id='num'>{product.count}</span> : 'hi'}
                                     <button onClick={() => { updateElementCounter(product.product.id, product.count - 1) }} className='btn btn-outline-success'>-</button>
                                 </div>
                             </div>

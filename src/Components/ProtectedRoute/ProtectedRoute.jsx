@@ -5,24 +5,24 @@ import { NavLink, Navigate, useNavigate } from 'react-router-dom'
 export default function ProtectedRoute({ children }) {
 
 
-  const { Token } =   useContext( authContext )
+  const { Token } = useContext(authContext)
 
 
 
 
   console.log(Token)
 
-  if( Token === null ){
+  if (Token === null) {
 
-    return  <NavLink to={'/login'} />  
+    return <NavLink to={'/login'} />
 
   }
- 
+
 
 
   return <>
-  
-  { children }
-  
+
+    {children}
+
   </>
 }

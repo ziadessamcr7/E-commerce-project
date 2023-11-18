@@ -13,7 +13,9 @@ export default function Products() {
 
     let [porductListCopy, setProductListCopy] = useState([])
 
-    const [lodin, setlodin] = useState(false)
+    // const [lodin, setlodin] = useState(false)
+
+    const [redHeart, setRedHEart] = useState(false)
 
     const { addProductToCart } = useContext(cartContext)
 
@@ -97,7 +99,7 @@ export default function Products() {
 
             // document.querySelector('.fa-heart').style.color = 'red'
 
-            setlodin(true)
+            // setlodin(true)
 
 
             const { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
@@ -113,7 +115,9 @@ export default function Products() {
                 toast.error('error occurred')
             }
 
-            setlodin(false)
+            // setlodin(false)
+
+            setRedHEart(true)
 
 
         }
@@ -124,9 +128,9 @@ export default function Products() {
     }
 
 
-    if (lodin) {
-        return <div className='Big-layer'> Loading... </div>
-    }
+    // if (lodin) {
+    //     return <div className='Big-layer'> Loading... </div>
+    // }
 
 
 
@@ -169,7 +173,14 @@ export default function Products() {
                                 {/* <p>{product.id}</p> */}
                             </div>
                         </Link>
-                        <div onClick={() => { addProductToWhishlist(product.id) }} style={{ cursor: "pointer" }}> <i class="fa-solid fa-heart fa-lg d-block ms-auto my-3"></i></div>
+                        <div onClick={() => { addProductToWhishlist(product.id) }} style={{ cursor: "pointer" }}>
+
+                            {redHeart ? <i class="fa-solid fa-heart fa-lg d-block ms-auto my-3 text-danger"></i> : <i class="fa-solid fa-heart fa-lg d-block ms-auto my-3"></i>}
+
+
+
+                        </div>
+
                         <button onClick={() => { addProduct(product.id) }} className='btn bg-main w-100 fw-bold'> + ADD TO CART
                         </button>
 

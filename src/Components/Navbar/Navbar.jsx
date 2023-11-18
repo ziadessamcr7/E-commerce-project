@@ -20,13 +20,16 @@ export default function Navbar() {
   }
 
   function logout() {
-    setToken(null);
-    setName(null);
 
     localStorage.removeItem("tkn");
     localStorage.removeItem('name');
 
+    setToken(null);
+    setName(null);
+
     navigate("/login");
+
+    console.log('log out here')
   }
 
   return (
@@ -142,7 +145,7 @@ export default function Navbar() {
                       onClick={logout}
                       className="nav-link"
                       aria-current="page"
-                      to="#"
+                    // to="#"
                     >
                       Logout
                     </span>
