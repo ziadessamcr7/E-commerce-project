@@ -27,7 +27,7 @@ export default function Navbar() {
     setToken(null);
     setName(null);
 
-    navigate("/login");
+    navigate("/e-commerce-login");
 
     console.log('log out here')
   }
@@ -157,7 +157,7 @@ export default function Navbar() {
                     <NavLink
                       className="nav-link"
                       aria-current="page"
-                      to="/login"
+                      to="/e-commerce-login"
                     >
                       Login
                     </NavLink>

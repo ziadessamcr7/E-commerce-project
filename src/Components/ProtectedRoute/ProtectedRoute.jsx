@@ -14,7 +14,7 @@ export default function ProtectedRoute({ children }) {
 
   if (Token === null) {
 
-    return <NavLink to={'/login'} />
+    return <NavLink to={'/e-commerce-login'} />
 
   }
 
