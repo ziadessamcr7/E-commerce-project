@@ -12,6 +12,8 @@ export default function Navbar() {
 
   const { numOfCartItems, setNumOfCartItems } = useContext(cartContext)
 
+  const { getUserCart } = useContext(cartContext)
+
   const navigate = useNavigate();
 
 
@@ -31,6 +33,8 @@ export default function Navbar() {
 
     console.log('log out here')
   }
+
+  getUserCart()
 
   return (
     <>

@@ -87,29 +87,38 @@ export default function Payment() {
     }
 
 
-    return <section id='payment' className='container'>
+    return <section id='payment' className=' vh-100'>
 
-        <h2>Payment</h2>
+        <div className='container text-white'>
+            <h2>Payment</h2>
 
-        <form>
+            <form>
 
-            <div className="row">
+                <div className="row text-white">
 
-                <label htmlFor="phone">Phone:</label>
-                <input type="text" className='form-control mb-3' id='phone' placeholder='phone ' />
+                    <label htmlFor="phone">Phone:</label>
+                    <input type="text" className='form-control mb-3' id='phone' placeholder='phone ' />
 
-                <label htmlFor="city">City:</label>
-                <input type="text" className='form-control mb-3' id='city' placeholder='city' />
+                    <label htmlFor="city">City:</label>
+                    <input type="text" className='form-control mb-3' id='city' placeholder='city' />
 
-                <label htmlFor="details">Details:</label>
-                <input type="text" className='form-control mb-5' id='details' placeholder='details' />
+                    <label htmlFor="details">Details:</label>
+                    <input type="text" className='form-control mb-5' id='details' placeholder='details' />
 
-                <button onClick={ConfirmCashPayment} type='button' className='btn btn-primary mb-3'>Confirm Cash Payment</button>
-                <button onClick={ConfirmOnlinePayment} type='button' className='btn btn-warning mb-5'>Confirm Online Payment</button>
+                    <div className="col-md-6">
+                        <button onClick={ConfirmCashPayment} type='button' className='btn text-white btn-outline-dark mb-3 w-100'>Confirm Cash Payment</button>
+                    </div>
+                    <div className="col-md-6">
+                        <button onClick={ConfirmOnlinePayment} type='button' className='btn text-white btn-outline-dark mb-5 w-100'>Confirm Online Payment</button>
+                    </div>
 
-            </div>
 
-        </form>
+                </div>
+
+            </form>
+
+        </div>
+
 
 
     </section>

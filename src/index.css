@@ -9,6 +9,25 @@
   --rating-color: #ffc908;
 }
 
+.background {
+  background-image: url('../src/images/blog-large.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  background-color: rgba(69, 88, 95, 0.9);
+  background-blend-mode: overlay;
+}
+
+#payment {
+  background-image: url('../src/images/payment2.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+  background-color: rgba(69, 88, 95, 0.9);
+  background-blend-mode: overlay;
+}
 
 .form-btn {
   background-color: var(--main-color);
@@ -171,4 +190,10 @@ a:hover {
 
 body {
   overflow: auto;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
 }

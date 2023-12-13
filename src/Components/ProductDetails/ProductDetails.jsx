@@ -96,7 +96,7 @@ export default function ProductDetails() {
           </div>
         </div>
       </div>
-    </div> : <p className=' d-flex justify-content-center align-items-center' id='loading-icon'> <ColorRing
+    </div> : <p className=' d-flex justify-content-center align-items-center vh-100' id='loading-icon'> <ColorRing
       visible={true}
       height="80"
       width="80"

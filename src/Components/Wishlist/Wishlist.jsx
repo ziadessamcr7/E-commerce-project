@@ -86,8 +86,8 @@ export default function Wishlist() {
     }
 
     if (item.length === 0) {
-        return <div className='pt-5'>
-            <h1 className='pt-5 vh-100'>Add some favs <Link className='text-success' to={'/home'} > from here </Link></h1>
+        return <div className='pt-4'>
+            <h2 className='pt-5 vh-100'>Add some favs <Link className='text-success' to={'/home'} > from here </Link></h2>
 
         </div>
     }
@@ -111,7 +111,7 @@ export default function Wishlist() {
                         <div className='col-md-8'>
                             <h5>{product.title}</h5>
                             <h6>{product.price} EGP</h6>
-                            <button onClick={() => { removeProduct(product.id) }} className='btn btn-outline-danger'>Remove</button>
+                            <button onClick={() => { removeProduct(product.id) }} className='btn btn-outline-danger'> <i className='fa fa-trash'></i> Remove</button>
                         </div>
 
                         <div className='col-md-2' >

@@ -4,7 +4,6 @@ import React, { useContext, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/Authentication";
-import { cartContext } from "../Context/CartContext";
 
 export default function Login() {
   let user = {
@@ -92,23 +91,23 @@ export default function Login() {
   });
 
   return (
-    <section id="login" className="">
+    <section id="login" className="background">
       {errorMsg ? (
-        <div className=" w-75 m-auto my-2 alert alert-danger"> {errorMsg} </div>
+        <div className=" w-50 m-auto my-2 alert alert-danger"> {errorMsg} </div>
       ) : (
         ""
       )}
 
       {success ? (
-        <div className=" w-75 m-auto my-2 alert alert-success"> {success} </div>
+        <div className=" w-50 m-auto my-2 alert alert-success"> {success} </div>
       ) : (
         ""
       )}
 
-      <h1 className="text-center">Login Now </h1>
+      <h1 className="text-center text-white">Login Now </h1>
 
-      <form className="w-75 m-auto" onSubmit={formik.handleSubmit}>
-        <label htmlFor="email">email</label>
+      <form className="w-50 bg-success-subtle p-4 rounded-4 text-dark m-auto" onSubmit={formik.handleSubmit}>
+        <label htmlFor="email" className="" >Email:</label>
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -124,7 +123,7 @@ export default function Login() {
           ""
         )}
 
-        <label htmlFor="pass">password</label>
+        <label htmlFor="pass" className="">Password:</label>
         <input
           onBlur={formik.handleBlur}
           onChange={formik.handleChange}
@@ -140,11 +139,11 @@ export default function Login() {
           ""
         )}
 
-        <h6 className="text-danger"> <Link className="text-danger" to={'/forgetpassword'}> forgetPassword..? </Link> </h6>
+        <h6> <Link className="" to={'/forgetpassword'}> Forgot Password? </Link> </h6>
 
-        <button type="submit" className="btn btn-success mt-3 ms-auto d-block">
+        <button type="submit" className="btn d-flex justify-content-center btn-success px-4 mt-3 ms-auto">
           {Loading === false ? (
-            "Login"
+            <span className="fw-bold">Login</span>
           ) : (
             <TailSpin
               height="30"

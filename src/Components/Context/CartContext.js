@@ -13,7 +13,6 @@ export function CartContextProvider({ children }) {
     const [cartId, setCartId] = useState(null)
 
 
-
     async function addProductToCart(Id) {
         try {
             const { data } = await axios.post('https://ecommerce.routemisr.com/api/v1/cart', {
@@ -21,12 +20,9 @@ export function CartContextProvider({ children }) {
             },
                 {
                     headers: { token: localStorage.getItem('tkn') }
-
                 })
 
-
             getUserCart()
-
 
             return data  // lazeem
 
@@ -34,9 +30,6 @@ export function CartContextProvider({ children }) {
         catch (err) {
             console.log('error', err)
         }
-
-
-
     }
 
     async function getUserCart() {
@@ -52,14 +45,10 @@ export function CartContextProvider({ children }) {
             setCartProducts(data.data.products)
             setCartId(data.data._id)
 
-            console.log(data)
-
         }
         catch (error) {
             console.log('error', error)
         }
-
-
     }
 
     async function removeProduct(productId) {
@@ -94,7 +83,6 @@ export function CartContextProvider({ children }) {
         setNumOfCartItems(data.numOfCartItems)
         setCartProducts(data.data.products)
         setTotalCartPrice(data.data.totalCartPrice)
-
 
         return data
     }

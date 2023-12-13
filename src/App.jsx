@@ -110,6 +110,7 @@ function App() {
 
         </AuthProvider>
       </CartContextProvider>
+
     </QueryClientProvider>
 
 

@@ -12,18 +12,24 @@ export default function Cart() {
 
     const [buffer, setBuffer] = useState(false)
 
-
-    if (Loading === true) {
-        return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
-            <RotatingLines
-                strokeColor="grey"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="50"
-                visible={true}
-            />
-        </p>
+    const clearCart = async () => {
+        setLoading(true)
+        await removeCartData()
+        setLoading(false)
     }
+
+
+    // if (Loading === true) {
+    //     return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
+    //         <RotatingLines
+    //             strokeColor="grey"
+    //             strokeWidth="5"
+    //             animationDuration="0.75"
+    //             width="50"
+    //             visible={true}
+    //         />
+    //     </p>
+    // }
 
     if (cartProducts === null) {
         return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
@@ -45,20 +51,19 @@ export default function Cart() {
 
     async function deleteProduct(id) {
 
-        setLoading(true)
+        setBuffer(id)
 
         const res = await removeProduct(id)
 
         if (res.status === 'success') {
             toast.success('Prodcut Removed Successfully')
-            // return <h1> deleted Successfully </h1>
         }
 
-        setLoading(false)
     }
 
 
     async function updateElementCounter(id, count) {
+
 
         const res = await updateProduct(id, count)
 
@@ -92,7 +97,9 @@ export default function Cart() {
                             <div className="col-md-9">
                                 <h6>Item Price: {product.price} </h6>
                                 <h6>Name: {product.product.title} </h6>
-                                <button onClick={() => { deleteProduct(product.product.id) }} className='btn btn-outline-danger'>Remove</button>
+                                <button onClick={() => { deleteProduct(product.product.id) }} className='btn btn-outline-danger'>
+                                    {product.product.id === buffer ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Remove'}
+                                </button>
                             </div>
                             <div className="col-md-2">
                                 <div className='d-flex align-items-center'>
@@ -125,7 +132,9 @@ export default function Cart() {
 
 
 
-        <button onClick={removeCartData} className='btn btn-warning mt-3 d-block ms-auto' >Clear Cart</button>
+        <button onClick={clearCart} className='btn btn-warning mt-3 d-block ms-auto' >
+            {Loading ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Clear Cart'}
+        </button>
 
     </section>
 }

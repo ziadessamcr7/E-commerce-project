@@ -8,13 +8,13 @@ export default function ProtectedRoute({ children }) {
   const { Token } = useContext(authContext)
 
 
-
+  const nav = useNavigate()
 
   console.log(Token)
 
   if (Token === null) {
 
-    return <NavLink to={'/e-commerce-login'} />
+    return nav('/e-commerce-login')
 
   }
 
