@@ -18,6 +18,10 @@ export default function Products() {
 
     const [prodId, setProdId] = useState([])
 
+    const [prodId2, setProdId2] = useState([])
+
+
+
     const { addProductToCart } = useContext(cartContext)
 
     const { isLoading, isFetching, data } = useQuery('allProducts', getAllProducts)
@@ -104,7 +108,7 @@ export default function Products() {
                 headers: { token: localStorage.getItem('tkn') }
             })
             if (data.status === 'success') {
-                setProdId(productId)
+                setProdId2(productId)
                 setStatus(data.status)
 
                 console.log(data);
@@ -161,7 +165,7 @@ export default function Products() {
                         </Link>
 
                         <button onClick={() => { addProductToWhishlist(product.id) }} style={{ cursor: "pointer" }}>
-                            {status == 'success' && prodId == product.id ?
+                            {status == 'success' && prodId2 == product.id ?
                                 <i className='fa solid fa-heart text-danger'></i>
                                 : <i className='fa solid fa-heart'></i>}
                         </button>
