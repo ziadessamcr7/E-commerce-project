@@ -12,22 +12,36 @@ export default function Wishlist() {
 
     const { addProductToCart } = useContext(cartContext)
 
-    const [loading, setLoading] = useState(false)
+    // const [loading, setLoading] = useState(false)
+
+    const [itemId, setItemId] = useState(0)
+    const [itemId2, setItemId2] = useState(0)
+
+    const [item, setItem] = useState(null)
+
+    useEffect(() => {
+        getUserWishlist()
+    }, [])
+
 
     async function addToCart(id) {
-        setLoading(true)
+
+        setItemId(id)
 
         await addProductToCart(id)
 
         removeProduct(id)
         toast.success('product successfully added to your cart')
 
-        setLoading(false)
+
+        setItemId(0)
+        getUserWishlist()
+
 
     }
 
 
-    const [item, setItem] = useState(null)
+
 
     async function getUserWishlist() {
 
@@ -40,30 +54,34 @@ export default function Wishlist() {
 
     }
 
-    getUserWishlist()
 
-    if (loading === true) {
-        return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
-            <RotatingLines
-                strokeColor="grey"
-                strokeWidth="5"
-                animationDuration="0.75"
-                width="50"
-                visible={true}
-            />
-        </p>
-    }
+
+    // if (loading === true) {
+    //     return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
+    //         <RotatingLines
+    //             strokeColor="grey"
+    //             strokeWidth="5"
+    //             animationDuration="0.75"
+    //             width="50"
+    //             visible={true}
+    //         />
+    //     </p>
+    // }
 
     async function removeProduct(productId) {
 
-        setLoading(true)
+        // setLoading(true)
+        setItemId2(productId)
 
-        const { data } = await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`, {
+        await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`, {
             headers: { token: localStorage.getItem('tkn') }
 
         })
 
-        setLoading(false)
+        // setLoading(false)
+        setItemId2(null)
+        getUserWishlist()
+
 
 
         // if (data.status === 'success') {
@@ -99,6 +117,8 @@ export default function Wishlist() {
 
         <div className="row g-5 mb-4">
 
+            <h2>My Wishlist <i className='fa fa-heart text-danger'></i> </h2>
+
 
             {item?.map((product, idx) => {
                 return <div key={idx} className="col-md-12">
@@ -111,11 +131,20 @@ export default function Wishlist() {
                         <div className='col-md-8'>
                             <h5>{product.title}</h5>
                             <h6>{product.price} EGP</h6>
-                            <button onClick={() => { removeProduct(product.id) }} className='btn btn-outline-danger'> <i className='fa fa-trash'></i> Remove</button>
+                            <button onClick={() => { removeProduct(product.id) }}
+                                className='btn btn-outline-danger'>
+                                {product.id == itemId2 ?
+                                    <i className='fa-solid fa-spin fa-spinner px-4'></i> : <span> <i className='fa fa-trash'></i> Remove</span>}
+
+                            </button>
                         </div>
 
                         <div className='col-md-2' >
-                            <button onClick={() => { addToCart(product.id) }} className='btn btn-outline-success'>add to cart</button>
+                            <button onClick={() => { addToCart(product.id); setItemId2(0) }}
+                                className='btn btn-outline-success'>
+                                {product.id == itemId ?
+                                    <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'add to cart'}
+                            </button>
                         </div>
                     </div>
 

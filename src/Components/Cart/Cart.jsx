@@ -12,6 +12,8 @@ export default function Cart() {
 
     const [buffer, setBuffer] = useState(false)
 
+    const [Num, setNum] = useState(false)
+
     const clearCart = async () => {
         setLoading(true)
         await removeCartData()
@@ -64,18 +66,22 @@ export default function Cart() {
 
     async function updateElementCounter(id, count) {
 
+        setNum(id)
 
         const res = await updateProduct(id, count)
 
         res.data.products.map(ele => {
             if (ele.count === 0) {
                 removeProduct(ele.product._id)
+
             }
         })
 
         if (res.status === 'success') {
             toast.success('updated successfully')
         }
+
+        setNum(null)
 
     }
 
@@ -98,13 +104,15 @@ export default function Cart() {
                                 <h6>Item Price: {product.price} </h6>
                                 <h6>Name: {product.product.title} </h6>
                                 <button onClick={() => { deleteProduct(product.product.id) }} className='btn btn-outline-danger'>
-                                    {product.product.id === buffer ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Remove'}
+                                    {product.product.id === buffer ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : <span> <i className='fa fa-trash'></i> Remove </span>}
                                 </button>
                             </div>
                             <div className="col-md-2">
                                 <div className='d-flex align-items-center'>
                                     <button onClick={() => { updateElementCounter(product.product.id, product.count + 1) }} className='btn btn-outline-success'>+</button>
-                                    {updateProduct ? <span className='mx-2' id='num'>{product.count}</span> : 'hi'}
+                                    {Num == product.product.id ?
+                                        <i className='fa-solid fa-spin fa-spinner mx-1'></i>
+                                        : <span className='mx-2' id='num'>{product.count}</span>}
                                     <button onClick={() => { updateElementCounter(product.product.id, product.count - 1) }} className='btn btn-outline-success'>-</button>
                                 </div>
                             </div>

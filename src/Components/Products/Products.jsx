@@ -5,70 +5,65 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useQuery } from 'react-query'
 import { cartContext } from '../Context/CartContext'
 import toast from 'react-hot-toast'
+import { authContext } from './../Context/Authentication';
 
 export default function Products() {
 
-    const [productList, setProductList] = useState()
+    const [productsArray, setProductsArray] = useState()
+    const [productsArray2, setProductsArray2] = useState()
 
-    let [porductListCopy, setProductListCopy] = useState([])
+    const { Token } = useContext(authContext)
 
-    const [redHeart, setRedHEart] = useState(null)
+    const [status, setStatus] = useState(null)
 
     const [prodId, setProdId] = useState([])
 
     const { addProductToCart } = useContext(cartContext)
 
-    // const { isLoading, isFetching, data } = useQuery('allProducts', getAllProducts)
+    const { isLoading, isFetching, data } = useQuery('allProducts', getAllProducts)
+
+    useEffect(() => {
+        console.log();
+        setProductsArray(data?.data.data)
+        setProductsArray2(data?.data.data)
+
+    }, [])
 
 
+    // const getAllProducts = () => {
+    //     axios.get('https://ecommerce.routemisr.com/api/v1/products')
+    //         .then((response) => {
+    //             console.log(response.data.data);
+    //             setProductList(response.data.data)
+    //         }).catch((error) => {
+    //             console.log('errrooorr', error);
+    //         })
+    // }
 
 
-    const getAllProducts = () => {
-        axios.get('https://ecommerce.routemisr.com/api/v1/products')
-            .then((response) => {
-                console.log(response.data.data);
-                setProductList(response.data.data)
-            }).catch((error) => {
-                console.log('errrooorr', error);
-            })
+    if (isLoading) {
+        return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        /> </p>
     }
 
 
-    // if (isLoading) {
-    //     return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
-    //         visible={true}
-    //         height="80"
-    //         width="80"
-    //         ariaLabel="blocks-loading"
-    //         wrapperStyle={{}}
-    //         wrapperClass="blocks-wrapper"
-    //         colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-    //     /> </p>
-    // }
 
 
 
 
 
-    // const { Token } = useContext( authContext )
-
-    // console.log( Token )
-    // const [ allProducts , setAllProducts ]=    useState(null)
-
-    // async function getAllProducts(){
-    //   const {data} = await axios.get('https://ecommerce.routemisr.com/api/v1/products')
+    async function getAllProducts() {
+        return await axios.get('https://ecommerce.routemisr.com/api/v1/products')
+    }
 
 
-    //   console.log( data.data )
-    //   setAllProducts( data.data )
-
-    // }
-
-    // useEffect(function(){
-
-    //   getAllProducts()
-
-    // },[])
 
 
 
@@ -76,15 +71,14 @@ export default function Products() {
 
     async function addProduct(id) {
 
-        setRedHEart(id)
+        setProdId(id)
         const res = await addProductToCart(id)
-
 
         // console.log(res)
 
         if (res.status === 'success') {
 
-            setRedHEart(null)
+            setProdId(null)
             toast.success(res.message, {
                 duration: 3000,
                 style: { background: 'green', color: "white" }
@@ -111,8 +105,9 @@ export default function Products() {
             })
             if (data.status === 'success') {
                 setProdId(productId)
+                setStatus(data.status)
 
-                console.log(data.status);
+                console.log(data);
                 toast.success(data.message)
 
             } else {
@@ -126,24 +121,16 @@ export default function Products() {
 
     }
 
+    function search(e) {
+        console.log(e.target.value)
+        const searchValue = e.target.value
+        let myProduct = [...productsArray2]
+        myProduct = productsArray2.filter((el) => {
+            return el.title.toLowerCase().includes(searchValue.toLowerCase())
+        })
 
-    // function search(e) {
-
-    //     let seachVal = e.target.value
-    //     let myProduct = [...data?.data.data]
-    //     let myProd = myProduct.filter((el) => {
-    //         return el.title.toLowerCase().includes(seachVal.toLowerCase())
-    //     })
-    //     // console.log(e.target.value)
-    //     setProductListCopy(myProd)
-    // }
-
-
-    useEffect(() => {
-
-        getAllProducts()
-
-    }, [])
+        data.data.data = myProduct
+    }
 
 
 
@@ -154,10 +141,11 @@ export default function Products() {
 
 
             <div className="row gy-4 mb-4">
-                {/* <input type="text" onChange={(e) => { search(e) }} placeholder='Search Products...' className='form-control' name="" id="" /> */}
+                <input type="text" onChange={search} placeholder='Search Products...' className='form-control' name="" id="" />
 
 
-                {productList?.map(function (product, idx) {
+                {data?.data?.data.map(function (product, idx) {
+
                     return <div key={idx} className="col-md-3 product"  >
 
                         <Link to={`/productdetails/${product.id}`}>
@@ -171,16 +159,15 @@ export default function Products() {
                                 </div>
                             </div>
                         </Link>
+
                         <button onClick={() => { addProductToWhishlist(product.id) }} style={{ cursor: "pointer" }}>
-
-                            {prodId == product.id ?
-                                <span className='fa-solid fa-heart text-danger'>added</span>
-                                : 'not added'}
-
+                            {status == 'success' && prodId == product.id ?
+                                <i className='fa solid fa-heart text-danger'></i>
+                                : <i className='fa solid fa-heart'></i>}
                         </button>
 
                         <button onClick={() => { addProduct(product.id) }} className='btn bg-main w-100 fw-bold'>
-                            {redHeart == product.id ?
+                            {prodId == product.id ?
                                 <i className='fa-solid fa-spin fa-spinner'></i> :
                                 '+ ADD TO CART'}
 
