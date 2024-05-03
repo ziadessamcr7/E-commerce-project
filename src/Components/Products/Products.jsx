@@ -153,14 +153,15 @@ export default function Products() {
 
 
                 {productList?.map(function (product, idx) {
+                    { console.log(product) }
 
-                    return <div key={idx} className="col-md-3 product"  >
+                    return <div key={idx} className="col-sm-4 col-md-3 col-lg-2 product"  >
 
                         <Link to={`/productdetails/${product.id}`}>
-                            <div className="text-success">
+                            <div title={product.title} className="">
                                 <img src={product.imageCover} className='w-100' alt="" />
-                                <h6 className='text-black'>{product.category.name}</h6>
                                 <p className='fw-bold'>{product.title.split(" ").slice(0, 3).join(' ')}</p>
+                                <h6 className='text-black'>{product.category.name}</h6>
                                 <div className='d-flex justify-content-between'>
                                     <h6>{product.price} EPG</h6>
                                     <span>{product.ratingsAverage}<i className="fa-solid fa-star text-warning"></i></span>
@@ -169,7 +170,7 @@ export default function Products() {
                         </Link>
 
                         <button onClick={() => handleWishList(product.id)} className={`position-relative end-0 border-0 bg-transparent`}>
-                            <i className={`${wishIcon.map((id) => id.id).includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart text-danger fs-2`}></i>
+                            <i className={`${wishIcon.map((id) => id.id).includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart text-danger fs-3`}></i>
                         </button>
 
 

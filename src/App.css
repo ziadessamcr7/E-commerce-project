@@ -1,3 +1,11 @@
+body {
+  background-image: url('images/rm222-mind-34.webp');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 .App {
   text-align: center;
 }
@@ -32,6 +40,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -7,8 +7,8 @@ import { authContext } from "../Context/Authentication";
 
 export default function Login() {
   let user = {
-    email: "",
-    password: ""
+    email: "ziadessamcr7@gmail.com",
+    password: "Zizo1234!"
   };
 
   const [errorMsg, setErrorMsg] = useState(null);
@@ -73,6 +73,7 @@ export default function Login() {
 
     onSubmit: userLogin,
 
+
     validate: function (values) {
       setErrorMsg(null);
       setSuccess(null);
@@ -121,6 +122,7 @@ export default function Login() {
           className="form-control mb-3"
           id="email"
           name="email"
+          defaultValue={'zoz@mail.com'}
         />
         {formik.errors.email && formik.touched.email ? (
           <div className="alert alert-danger">{formik.errors.email}</div>
@@ -137,6 +139,7 @@ export default function Login() {
           className="form-control mb-3"
           id="password"
           name="password"
+          defaultValue={'123456'}
         />
         {formik.errors.password && formik.touched.password ? (
           <div className="alert alert-danger">{formik.errors.password}</div>

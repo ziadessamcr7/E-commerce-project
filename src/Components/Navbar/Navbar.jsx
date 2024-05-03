@@ -92,19 +92,7 @@ export default function Navbar() {
                       Categories
                     </NavLink>
                   </li>
-                  <li className="nav-item">
-                    <NavLink
-                      className="nav-link position-relative"
-                      aria-current="page"
-                      to="wishlist"
-                    >
-                      Wishlist
-                      <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
-                        {numOfwishListedItems}
-                        <span class="visually-hidden">unread messages</span>
-                      </span>
-                    </NavLink>
-                  </li>
+
                   {/* <li className="nav-item">
                     <NavLink
                       className="nav-link"
@@ -116,11 +104,24 @@ export default function Navbar() {
                   </li> */}
                   <li className="nav-item">
                     <NavLink
-                      className="nav-link ms-2"
+                      className="nav-link"
                       aria-current="page"
                       to="products"
                     >
                       Products
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link position-relative"
+                      aria-current="page"
+                      to="wishlist"
+                    >
+                      <i className="fa-heart fa-solid text-success fs-4"></i>
+                      <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                        {numOfwishListedItems}
+                        <span class="visually-hidden">unread messages</span>
+                      </span>
                     </NavLink>
                   </li>
 

@@ -93,6 +93,7 @@ export default function Wishlist() {
                 return <div key={idx} className="col-md-12">
                     <div className='bg-dark-subtle p-3 rounded-2 row align-items-center' >
                         <div className='col-md-2'>
+                            {console.log(product)}
                             <img src={product.imageCover} className='w-100' alt="" />
 
                         </div>
@@ -100,6 +101,10 @@ export default function Wishlist() {
                         <div className='col-md-8'>
                             <h5>{product.title}</h5>
                             <h6>{product.price} EGP</h6>
+                            <div className='d-flex align-items-center'>
+                                <h6 className='me-1'>Brand:</h6>
+                                <h6>  {product.brand.name}  </h6>
+                            </div>
                             <button onClick={() => { removProdFromWishList(product.id) }}
                                 className='btn btn-outline-danger'>
                                 {product.id == itemId2 ?
@@ -108,7 +113,7 @@ export default function Wishlist() {
                             </button>
                         </div>
 
-                        <div className='col-md-2' >
+                        <div className='col-md-2 py-2' >
                             <button onClick={() => { addToCart(product.id); setItemId2(0) }}
                                 className='btn btn-outline-success'>
                                 {product.id == itemId ?

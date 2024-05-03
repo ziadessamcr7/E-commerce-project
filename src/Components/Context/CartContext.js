@@ -9,7 +9,7 @@ export function CartContextProvider({ children }) {
 
     const [cartProducts, setCartProducts] = useState([])
     const [totalCartPrice, setTotalCartPrice] = useState(0)
-    const [numOfCartItems, setNumOfCartItems] = useState(500)
+    const [numOfCartItems, setNumOfCartItems] = useState(0)
     const [cartId, setCartId] = useState(null)
 
 

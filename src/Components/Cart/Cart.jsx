@@ -79,25 +79,36 @@ export default function Cart() {
     return <section id='cart' className='container pb-3 mb-4 position-relative'>
 
         <div className="row bg-">
-            <div className="col-md-9">
+            <div className="col-md-8 mb-2">
                 <div className='bg-dark-subtle p-3 rounded-2'>
-                    <h4 className='text-success'>Total Price: {totalCartPrice} EGP</h4>
-                    <h4 className='text-primary mb-4 border-bottom border-3 pb-2'> Number Of Cart Items:({numOfCartItems}) </h4>
+                    <div className='d-flex justify-content-between'>
+                        <div>
+                            <h4 className='text-success'>Total Price: {totalCartPrice} EGP</h4>
+                            <h4 className='text-primary mb-4 border-bottom border-3 pb-2'> Number Of Cart Items:({numOfCartItems}) </h4>
+                        </div>
+                        <div>
+                            <button onClick={clearCart} className='btn btn-danger mt-3 d-block ms-auto' >
+                                {Loading ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Clear Cart'}
+                            </button>
+                        </div>
+
+                    </div>
+
 
                     {cartProducts.map((product, idx) => {
                         return <div className="row align-items-center py-3 border-3 border-bottom">
                             <div className="col-md-1">
                                 <img src={product.product.imageCover} className='w-100' alt="" />
                             </div>
-                            <div className="col-md-9">
+                            <div className="col-md-8">
                                 <h6>Item Price: {product.price} </h6>
                                 <h6>Name: {product.product.title} </h6>
                                 <button onClick={() => { deleteProduct(product.product.id) }} className='btn btn-outline-danger'>
                                     {product.product.id === buffer ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : <span> <i className='fa fa-trash'></i> Remove </span>}
                                 </button>
                             </div>
-                            <div className="col-md-2">
-                                <div className='d-flex align-items-center'>
+                            <div className="col-md-3 ">
+                                <div className='d-flex align-items-center justify-content-end'>
                                     <button onClick={() => { updateElementCounter(product.product.id, product.count + 1) }} className='btn btn-outline-success'>+</button>
                                     {Num == product.product.id ?
                                         <i className='fa-solid fa-spin fa-spinner mx-1'></i>
@@ -113,7 +124,7 @@ export default function Cart() {
                 </div>
             </div>
 
-            <div className="col-md-3">
+            <div className="col-md-4">
                 <div className='bg-dark-subtle p-2 rounded-2'>
                     <h6 className='border-bottom border-1 pb-2'>CART SUMMARY</h6>
                     <div className='d-flex justify-content-between align-items-center border-bottom border-1 pb-2'>
@@ -129,9 +140,7 @@ export default function Cart() {
 
 
 
-        <button onClick={clearCart} className='btn btn-warning mt-3 d-block ms-auto' >
-            {Loading ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Clear Cart'}
-        </button>
+
 
     </section>
 }
