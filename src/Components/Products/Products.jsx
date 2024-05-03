@@ -155,7 +155,7 @@ export default function Products() {
                 {productList?.map(function (product, idx) {
                     { console.log(product) }
 
-                    return <div key={idx} className="col-sm-4 col-md-3 col-lg-2 product"  >
+                    return <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2 product"  >
 
                         <Link to={`/productdetails/${product.id}`}>
                             <div title={product.title} className="">
