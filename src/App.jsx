@@ -21,6 +21,7 @@ import AllOrders from './Components/AllOrders/AllOrders';
 import Products from './Components/Products/Products';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
+import WishlistContextProvider from './Components/Context/WishlistContext';
 
 
 const queryClient = new QueryClient()
@@ -103,13 +104,16 @@ function App() {
 
     <QueryClientProvider client={queryClient}>
 
-      <CartContextProvider>
-        <AuthProvider>
+      <WishlistContextProvider>
+        <CartContextProvider>
+          <AuthProvider>
 
-          <RouterProvider router={router} />
+            <RouterProvider router={router} />
 
-        </AuthProvider>
-      </CartContextProvider>
+          </AuthProvider>
+        </CartContextProvider>
+      </WishlistContextProvider>
+
 
     </QueryClientProvider>
 

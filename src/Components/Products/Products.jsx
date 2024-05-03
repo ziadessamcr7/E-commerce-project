@@ -6,71 +6,65 @@ import { useQuery } from 'react-query'
 import { cartContext } from '../Context/CartContext'
 import toast from 'react-hot-toast'
 import { authContext } from './../Context/Authentication';
+import { wishlistContext } from '../Context/WishlistContext'
 
 export default function Products() {
 
-    const [productsArray, setProductsArray] = useState()
-    const [productsArray2, setProductsArray2] = useState()
+    // let [productsArray, setProductsArray] = useState([])
+    let [productsArray2, setProductsArray2] = useState([])
 
-    const { Token } = useContext(authContext)
-
-    const [status, setStatus] = useState(null)
+    let [productList, setProductList] = useState([])
 
     const [prodId, setProdId] = useState([])
 
-    const [prodId2, setProdId2] = useState([])
+    const [wishIcon, setWishIcon] = useState([]);
 
 
 
-    const { addProductToCart } = useContext(cartContext)
 
-    const { isLoading, isFetching, data } = useQuery('allProducts', getAllProducts)
+
+    const { addProductToCart, getUserCart } = useContext(cartContext)
+    const { addProductToWhishlist, getUserWishlist, removeProductFromWishlist } = useContext(wishlistContext)
+
+    // const { isLoading, isFetching, data } = useQuery('allProducts', getAllProducts)
 
     useEffect(() => {
-        console.log();
-        setProductsArray(data?.data.data)
-        setProductsArray2(data?.data.data)
 
+        // setProductsArray(data?.data?.data)
+        // setProductsArray2(data?.data?.data)
+        // // setProductsArray2(data?.data.data)
+        // console.log(data?.data?.data)
+        getAllProducts()
     }, [])
 
 
-    // const getAllProducts = () => {
-    //     axios.get('https://ecommerce.routemisr.com/api/v1/products')
-    //         .then((response) => {
-    //             console.log(response.data.data);
-    //             setProductList(response.data.data)
-    //         }).catch((error) => {
-    //             console.log('errrooorr', error);
-    //         })
+
+    // if (isLoading) {
+    //     return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
+    //         visible={true}
+    //         height="80"
+    //         width="80"
+    //         ariaLabel="blocks-loading"
+    //         wrapperStyle={{}}
+    //         wrapperClass="blocks-wrapper"
+    //         colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+    //     /> </p>
     // }
-
-
-    if (isLoading) {
-        return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-        /> </p>
-    }
-
-
 
 
 
 
 
     async function getAllProducts() {
-        return await axios.get('https://ecommerce.routemisr.com/api/v1/products')
+        await axios.get('https://ecommerce.routemisr.com/api/v1/products')
+            .then((response) => {
+                setProductList(response.data.data)
+                setProductsArray2(response.data.data)
+            })
+            .catch((error) => {
+                console.log(error);
+            })
     }
-
-
-
-
-
 
 
     async function addProduct(id) {
@@ -78,9 +72,9 @@ export default function Products() {
         setProdId(id)
         const res = await addProductToCart(id)
 
-        // console.log(res)
+        console.log(res)
 
-        if (res.status === 'success') {
+        if (res?.status === 'success') {
 
             setProdId(null)
             toast.success(res.message, {
@@ -96,46 +90,56 @@ export default function Products() {
 
 
 
-    async function addProductToWhishlist(productId) {
-
-        try {
-
-
-            const { data } = await axios.post(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
-
-                "productId": productId,
-            }, {
-                headers: { token: localStorage.getItem('tkn') }
-            })
-            if (data.status === 'success') {
-                setProdId2(productId)
-                setStatus(data.status)
-
-                console.log(data);
-                toast.success(data.message)
-
-            } else {
-                toast.error('error occurred')
-            }
-
-        }
-        catch (error) {
-            console.log('error', error)
-        }
-
-    }
-
     function search(e) {
         console.log(e.target.value)
-        const searchValue = e.target.value
+        let searchValue = e.target.value
         let myProduct = [...productsArray2]
-        myProduct = productsArray2.filter((el) => {
+        myProduct = productsArray2?.filter((el) => {
             return el.title.toLowerCase().includes(searchValue.toLowerCase())
         })
 
-        data.data.data = myProduct
+        setProductList(myProduct)
     }
 
+    const handleWishList = async (id) => {
+        const isInWishlist = wishIcon.some((item) => item.id === id);
+
+        if (isInWishlist) {
+            await removeProductFromWishlist(id);
+            setWishIcon(wishIcon.filter((item) => item.id !== id));
+            toast.error('Remove From WishList', {
+                duration: 4000,
+                position: 'top-center',
+
+                className: 'mt-2 bg-danger text-white',
+
+
+            });
+        } else {
+            await addProductToWhishlist(id);
+            setWishIcon([...wishIcon, { id }]);
+            toast.success(" Added successfully to your wishlist", {
+                duration: 4000,
+                position: 'top-center',
+
+                className: 'mt-2 bg-main text-white',
+            });
+        }
+        getUserWishlist()
+    };
+
+    const showWhishlist = async () => {
+        let res = await getUserWishlist();
+        if (res.status == "success") {
+            setWishIcon(res.data);
+        }
+    }
+
+
+    useEffect(() => {
+        showWhishlist()
+        getUserCart()
+    }, [])
 
 
 
@@ -145,10 +149,10 @@ export default function Products() {
 
 
             <div className="row gy-4 mb-4">
-                <input type="text" onChange={search} placeholder='Search Products...' className='form-control' name="" id="" />
+                <input type="text" onChange={(e) => { search(e) }} placeholder='Search Products...' className='form-control' name="" id="" />
 
 
-                {data?.data?.data.map(function (product, idx) {
+                {productList?.map(function (product, idx) {
 
                     return <div key={idx} className="col-md-3 product"  >
 
@@ -164,11 +168,10 @@ export default function Products() {
                             </div>
                         </Link>
 
-                        <button onClick={() => { addProductToWhishlist(product.id) }} style={{ cursor: "pointer" }}>
-                            {status == 'success' && prodId2 == product.id ?
-                                <i className='fa solid fa-heart text-danger'></i>
-                                : <i className='fa solid fa-heart'></i>}
+                        <button onClick={() => handleWishList(product.id)} className={`position-relative end-0 border-0 bg-transparent`}>
+                            <i className={`${wishIcon.map((id) => id.id).includes(product.id) ? "fa-solid" : "fa-regular"} fa-heart text-danger fs-2`}></i>
                         </button>
+
 
                         <button onClick={() => { addProduct(product.id) }} className='btn bg-main w-100 fw-bold'>
                             {prodId == product.id ?

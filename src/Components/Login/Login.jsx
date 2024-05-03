@@ -1,6 +1,6 @@
 import axios from "axios";
 import { Formik, useFormik } from "formik";
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { TailSpin } from "react-loader-spinner";
 import { Link, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/Authentication";
@@ -23,10 +23,14 @@ export default function Login() {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (localStorage.getItem("tkn") !== null) {
+      navigate("/home");
+    }
+  }, [])
 
-  if (localStorage.getItem("tkn") !== null) {
-    navigate("/home");
-  }
+
+
 
   async function userLogin(vals) {
     console.log("sending to backend...");
@@ -56,7 +60,7 @@ export default function Login() {
 
       setTimeout(() => {
         navigate("/home");
-      }, 2000);
+      }, 100);
     }
 
 
@@ -89,6 +93,7 @@ export default function Login() {
       return errors;
     },
   });
+
 
   return (
     <section id="login" className="background">

@@ -5,14 +5,15 @@ import { cartContext } from '../Context/CartContext'
 import { useQuery } from 'react-query'
 import { ColorRing, RotatingLines } from 'react-loader-spinner'
 import { Link } from 'react-router-dom'
+import { wishlistContext } from '../Context/WishlistContext'
 
 export default function Wishlist() {
 
 
 
     const { addProductToCart } = useContext(cartContext)
+    const { getUserWishlist, removeProductFromWishlist } = useContext(wishlistContext)
 
-    // const [loading, setLoading] = useState(false)
 
     const [itemId, setItemId] = useState(0)
     const [itemId2, setItemId2] = useState(0)
@@ -20,7 +21,7 @@ export default function Wishlist() {
     const [item, setItem] = useState(null)
 
     useEffect(() => {
-        getUserWishlist()
+        getAllWishListItems()
     }, [])
 
 
@@ -30,68 +31,36 @@ export default function Wishlist() {
 
         await addProductToCart(id)
 
-        removeProduct(id)
+
+        removProdFromWishList(id)
         toast.success('product successfully added to your cart')
 
 
         setItemId(0)
-        getUserWishlist()
+        getAllWishListItems()
 
 
     }
 
 
-
-
-    async function getUserWishlist() {
-
-        const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/wishlist`, {
-            headers: { token: localStorage.getItem('tkn') }
-        })
-
-        setItem(data.data)
-
-
+    const getAllWishListItems = async () => {
+        const wishListItems = await getUserWishlist()
+        setItem(wishListItems.data)
+        console.log(wishListItems);
     }
 
-
-
-    // if (loading === true) {
-    //     return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
-    //         <RotatingLines
-    //             strokeColor="grey"
-    //             strokeWidth="5"
-    //             animationDuration="0.75"
-    //             width="50"
-    //             visible={true}
-    //         />
-    //     </p>
-    // }
-
-    async function removeProduct(productId) {
-
-        // setLoading(true)
-        setItemId2(productId)
-
-        await axios.delete(`https://ecommerce.routemisr.com/api/v1/wishlist/${productId}`, {
-            headers: { token: localStorage.getItem('tkn') }
-
-        })
-
-        // setLoading(false)
+    const removProdFromWishList = async (prodId) => {
+        setItemId2(prodId)
+        const res = await removeProductFromWishlist(prodId)
         setItemId2(null)
-        getUserWishlist()
-
-
-
-        // if (data.status === 'success') {
-        //     toast.error(data.message)
-        // }
-
-
+        getAllWishListItems()
+        console.log(res);
     }
 
-    if (item === null) {
+
+
+
+    if (item == null) {
         return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
             visible={true}
             height="80"
@@ -103,7 +72,7 @@ export default function Wishlist() {
         /> </p>
     }
 
-    if (item.length === 0) {
+    if (item?.length === 0) {
         return <div className='pt-4'>
             <h2 className='pt-5 vh-100'>Add some favs <Link className='text-success' to={'/home'} > from here </Link></h2>
 
@@ -131,7 +100,7 @@ export default function Wishlist() {
                         <div className='col-md-8'>
                             <h5>{product.title}</h5>
                             <h6>{product.price} EGP</h6>
-                            <button onClick={() => { removeProduct(product.id) }}
+                            <button onClick={() => { removProdFromWishList(product.id) }}
                                 className='btn btn-outline-danger'>
                                 {product.id == itemId2 ?
                                     <i className='fa-solid fa-spin fa-spinner px-4'></i> : <span> <i className='fa fa-trash'></i> Remove</span>}

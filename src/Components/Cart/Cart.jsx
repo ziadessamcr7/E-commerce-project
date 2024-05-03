@@ -21,36 +21,6 @@ export default function Cart() {
     }
 
 
-    // if (Loading === true) {
-    //     return <p id='loading-layer' className='d-flex justify-content-center align-items-center'>
-    //         <RotatingLines
-    //             strokeColor="grey"
-    //             strokeWidth="5"
-    //             animationDuration="0.75"
-    //             width="50"
-    //             visible={true}
-    //         />
-    //     </p>
-    // }
-
-    if (cartProducts === null) {
-        return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
-            visible={true}
-            height="80"
-            width="80"
-            ariaLabel="blocks-loading"
-            wrapperStyle={{}}
-            wrapperClass="blocks-wrapper"
-            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
-        /> </p>
-    }
-    if (cartProducts.length === 0) {
-        return <>
-            <h2 className='pt-3'> </h2>
-            <h2 className='pt-5 vh-100'>Empty cart <Link className='text-success' to={'/home'} >Get some products</Link> </h2>
-        </>
-    }
-
     async function deleteProduct(id) {
 
         setBuffer(id)
@@ -83,6 +53,25 @@ export default function Cart() {
 
         setNum(null)
 
+    }
+
+
+    if (cartProducts === null) {
+        return <p className='vh-100 d-flex justify-content-center' id='loading-icon'> <ColorRing
+            visible={true}
+            height="80"
+            width="80"
+            ariaLabel="blocks-loading"
+            wrapperStyle={{}}
+            wrapperClass="blocks-wrapper"
+            colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        /> </p>
+    }
+    if (cartProducts.length === 0) {
+        return <>
+            <h2 className='pt-3'> </h2>
+            <h2 className='pt-5 vh-100'>Empty cart <Link className='text-success' to={'/home'} >Get some products</Link> </h2>
+        </>
     }
 
 

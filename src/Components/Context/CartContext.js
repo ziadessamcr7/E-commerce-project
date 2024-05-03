@@ -9,9 +9,29 @@ export function CartContextProvider({ children }) {
 
     const [cartProducts, setCartProducts] = useState([])
     const [totalCartPrice, setTotalCartPrice] = useState(0)
-    const [numOfCartItems, setNumOfCartItems] = useState(0)
+    const [numOfCartItems, setNumOfCartItems] = useState(500)
     const [cartId, setCartId] = useState(null)
 
+
+    async function getUserCart() {
+
+        try {
+
+            const { data } = await axios.get('https://ecommerce.routemisr.com/api/v1/cart', {
+                headers: { token: localStorage.getItem('tkn') }
+            })
+
+            setTotalCartPrice(data.data.totalCartPrice)
+            setNumOfCartItems(data.numOfCartItems)
+            setCartProducts(data.data.products)
+            setCartId(data.data._id)
+            console.log(data);
+
+        }
+        catch (error) {
+            console.log('error', error)
+        }
+    }
 
     async function addProductToCart(Id) {
         try {
@@ -32,24 +52,6 @@ export function CartContextProvider({ children }) {
         }
     }
 
-    async function getUserCart() {
-
-        try {
-
-            const { data } = await axios.get('https://ecommerce.routemisr.com/api/v1/cart', {
-                headers: { token: localStorage.getItem('tkn') }
-            })
-
-            setTotalCartPrice(data.data.totalCartPrice)
-            setNumOfCartItems(data.numOfCartItems)
-            setCartProducts(data.data.products)
-            setCartId(data.data._id)
-
-        }
-        catch (error) {
-            console.log('error', error)
-        }
-    }
 
     async function removeProduct(productId) {
 
@@ -98,10 +100,13 @@ export function CartContextProvider({ children }) {
 
     }
 
-
-    useEffect(function () {
-        getUserCart()
+    useEffect(() => {
+        if (localStorage.getItem('tkn') !== null) {
+            getUserCart()
+            console.log('zzzzzzzzzz');
+        }
     }, [])
+
 
 
 
@@ -118,6 +123,7 @@ export function CartContextProvider({ children }) {
         setCartProducts,
         setTotalCartPrice,
         setNumOfCartItems,
+
     }}>
 
 

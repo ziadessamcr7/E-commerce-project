@@ -1,8 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { authContext } from "../Context/Authentication";
 import logo from "../../images/freshcart-logo.svg";
 import { cartContext } from "../Context/CartContext";
+import { wishlistContext } from "../Context/WishlistContext";
 
 
 export default function Navbar() {
@@ -10,16 +11,25 @@ export default function Navbar() {
 
   const { Name, setName } = useContext(authContext);
 
-  const { numOfCartItems, setNumOfCartItems } = useContext(cartContext)
+  const { numOfCartItems, getUserCart } = useContext(cartContext)
 
-  const { getUserCart } = useContext(cartContext)
+  const { numOfwishListedItems } = useContext(wishlistContext)
 
   const navigate = useNavigate();
 
 
-  if (localStorage.getItem('name') !== null) {
-    setName(localStorage.getItem('name'))
-  }
+  useEffect(() => {
+    if (localStorage.getItem('name') !== null) {
+      setName(localStorage.getItem('name'))
+      getUserCart()
+    }
+
+
+
+  }, [])
+
+
+
 
   function logout() {
 
@@ -31,10 +41,9 @@ export default function Navbar() {
 
     navigate("/e-commerce-login");
 
-    console.log('log out here')
   }
 
-  getUserCart()
+
 
   return (
     <>
@@ -85,11 +94,15 @@ export default function Navbar() {
                   </li>
                   <li className="nav-item">
                     <NavLink
-                      className="nav-link"
+                      className="nav-link position-relative"
                       aria-current="page"
                       to="wishlist"
                     >
                       Wishlist
+                      <span class="position-absolute top-2 start-100 translate-middle badge rounded-pill bg-danger">
+                        {numOfwishListedItems}
+                        <span class="visually-hidden">unread messages</span>
+                      </span>
                     </NavLink>
                   </li>
                   {/* <li className="nav-item">
@@ -103,7 +116,7 @@ export default function Navbar() {
                   </li> */}
                   <li className="nav-item">
                     <NavLink
-                      className="nav-link"
+                      className="nav-link ms-2"
                       aria-current="page"
                       to="products"
                     >
