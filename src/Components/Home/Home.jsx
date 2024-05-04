@@ -15,7 +15,9 @@ export default function Home() {
 
       <HomeSlider />
 
+
       <CategorySlider />
+
 
       <Products />
 

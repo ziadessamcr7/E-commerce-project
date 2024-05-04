@@ -5,6 +5,7 @@ import Slider from 'react-slick';
 import { useQuery } from 'react-query';
 import axios from 'axios';
 import { Bars } from 'react-loader-spinner';
+import { Link } from 'react-router-dom';
 
 export default function CategorySlider() {
 
@@ -21,7 +22,7 @@ export default function CategorySlider() {
         dots: true,
         infinite: true,
         speed: 500,
-        slidesToShow: 6,
+        slidesToShow: 3,
         slidesToScroll: 1,
         // arrows: false,
     };
@@ -55,10 +56,11 @@ export default function CategorySlider() {
                     <Slider {...settings}>
 
                         {data?.data.data.map(function (category, idx) {
-                            return <div key={idx}>
-                                <img style={{ width: '100%', height: '250px', margin: 'auto' }} src={category.image} alt="" />
-                                <h6 className='my-2 text-center'> {category.name} </h6>
-                            </div>
+                            return <Link to={`/categoryProducts/${category._id}`}>
+                                <div key={idx}>
+                                    <img style={{ width: '100%', height: '250px', margin: 'auto' }} src={category.image} alt="" />
+                                    <h6 className='my-2 text-center'> {category.name} </h6>
+                                </div> </Link>
                         })}
 
                     </Slider>

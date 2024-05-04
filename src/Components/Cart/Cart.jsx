@@ -76,28 +76,21 @@ export default function Cart() {
 
 
 
-    return <section id='cart' className='container pb-3 mb-4 position-relative'>
+    return <section id='cart' className='container pb-3 position-relative'>
 
         <div className="row bg-">
             <div className="col-md-8 mb-2">
-                <div className='bg-dark-subtle p-3 rounded-2'>
+                <div className='bg-success-subtle p-3 rounded-2'>
                     <div className='d-flex justify-content-between'>
                         <div>
-                            <h4 className='text-success'>Total Price: {totalCartPrice} EGP</h4>
-                            <h4 className='text-primary mb-4 border-bottom border-3 pb-2'> Number Of Cart Items:({numOfCartItems}) </h4>
+                            <h4 className=''> Products:({numOfCartItems}) </h4>
                         </div>
-                        <div>
-                            <button onClick={clearCart} className='btn btn-danger mt-3 d-block ms-auto' >
-                                {Loading ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Clear Cart'}
-                            </button>
-                        </div>
-
                     </div>
 
 
                     {cartProducts.map((product, idx) => {
-                        return <div className="row align-items-center py-3 border-3 border-bottom">
-                            <div className="col-md-1">
+                        return <div className="row align-items-center py-3 border-2 border-bottom border-success">
+                            <div className="col-md-2">
                                 <img src={product.product.imageCover} className='w-100' alt="" />
                             </div>
                             <div className="col-md-8">
@@ -107,7 +100,7 @@ export default function Cart() {
                                     {product.product.id === buffer ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : <span> <i className='fa fa-trash'></i> Remove </span>}
                                 </button>
                             </div>
-                            <div className="col-md-3 ">
+                            <div className="col-md-2">
                                 <div className='d-flex align-items-center justify-content-end'>
                                     <button onClick={() => { updateElementCounter(product.product.id, product.count + 1) }} className='btn btn-outline-success'>+</button>
                                     {Num == product.product.id ?
@@ -124,15 +117,19 @@ export default function Cart() {
                 </div>
             </div>
 
-            <div className="col-md-4">
-                <div className='bg-dark-subtle p-2 rounded-2'>
-                    <h6 className='border-bottom border-1 pb-2'>CART SUMMARY</h6>
-                    <div className='d-flex justify-content-between align-items-center border-bottom border-1 pb-2'>
-                        <span>Subtotal</span>
+            <div className="col-md-4 position-relative">
+                <div className='bg-success-subtle p-2 rounded-2 position-fixed w-25'>
+                    <h6 className='border-bottom border-1 border-dark pb-2'>CART SUMMARY <i class="fa-solid fa-cart-shopping fa-lg text-success"></i> </h6>
+                    <div className='d-flex justify-content-between border-bottom border-1 pb-2'>
+                        <span className='fs-5 fw-bold'>Subtotal</span>
                         <h5 className='fs-4'>EGP {totalCartPrice} </h5>
                     </div>
                     <Link to={'/payment'} className='btn btn-success w-100 mt-2' >CheckOut </Link>
-
+                    <div>
+                        <button onClick={clearCart} className='btn btn-outline-danger mt-3 d-block ms-auto w-100' >
+                            {Loading ? <i className='fa-solid fa-spin fa-spinner px-4'></i> : 'Clear Cart'}
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

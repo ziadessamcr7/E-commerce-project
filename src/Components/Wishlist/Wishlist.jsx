@@ -84,14 +84,14 @@ export default function Wishlist() {
     return <section id='wishlist' className='container'>
 
 
-        <div className="row g-5 mb-4">
+        <div className="row g-5 pb-4">
 
             <h2>My Wishlist <i className='fa fa-heart text-danger'></i> </h2>
 
 
             {item?.map((product, idx) => {
                 return <div key={idx} className="col-md-12">
-                    <div className='bg-dark-subtle p-3 rounded-2 row align-items-center' >
+                    <div className='bg-success-subtle p-3 rounded-2 row align-items-center' >
                         <div className='col-md-2'>
                             {console.log(product)}
                             <img src={product.imageCover} className='w-100' alt="" />

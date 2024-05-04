@@ -8,9 +8,9 @@ export default function Layout() {
 
     <Navbar />
 
-    <Outlet />
-
-    {/* <Footer /> */}
+    <div className='containerHome'>
+      <Outlet />
+    </div>
 
   </>
 }

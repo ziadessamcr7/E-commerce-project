@@ -22,6 +22,7 @@ import Products from './Components/Products/Products';
 import ForgetPassword from './Components/ForgetPassword/ForgetPassword';
 import ResetPassword from './Components/ResetPassword/ResetPassword';
 import WishlistContextProvider from './Components/Context/WishlistContext';
+import CategoryProducts from './Components/CategoryProducts/CategoryProducts';
 
 
 const queryClient = new QueryClient()
@@ -45,6 +46,11 @@ const router = createBrowserRouter([
       {
         path: 'categories', element: <ProtectedRoute>
           <Categories />
+        </ProtectedRoute>
+      },
+      {
+        path: 'categoryProducts/:id', element: <ProtectedRoute>
+          <CategoryProducts />
         </ProtectedRoute>
       },
       {

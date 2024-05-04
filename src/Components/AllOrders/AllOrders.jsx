@@ -3,6 +3,7 @@ import { cartContext } from '../Context/CartContext'
 import axios from 'axios'
 import jwtDecode from 'jwt-decode'
 import { ColorRing } from 'react-loader-spinner'
+import { Link } from 'react-router-dom'
 
 export default function AllOrders() {
 
@@ -45,6 +46,21 @@ export default function AllOrders() {
             wrapperClass="blocks-wrapper"
             colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
         /> </p>
+    }
+    if (userOrders.length == 0) {
+        return <div className='d-flex justify-content-center align-items-center vh-100'>
+            <div>
+                <h1 className='pt-5'> You have no orders yet </h1>
+                <div className='d-flex align-items-center'>
+                    <p className='m-0 fs-4 me-2'> Check our products</p>
+                    <Link to={'/home'} className='text-success d-block text-center fs-4 fw-bold cursor-pointer text-decoration-underline'>
+                        here!
+                    </Link>
+
+                </div>
+
+            </div>
+        </div>
     }
 
 

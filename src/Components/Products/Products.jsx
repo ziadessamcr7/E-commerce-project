@@ -7,6 +7,8 @@ import { cartContext } from '../Context/CartContext'
 import toast from 'react-hot-toast'
 import { authContext } from './../Context/Authentication';
 import { wishlistContext } from '../Context/WishlistContext'
+import ReactPaginate from 'react-paginate'
+import Pagination from '../Pagination/Pagination'
 
 export default function Products() {
 
@@ -18,6 +20,8 @@ export default function Products() {
     const [prodId, setProdId] = useState([])
 
     const [wishIcon, setWishIcon] = useState([]);
+
+    const [totalNumOfPages, setTotalNumOfPages] = useState([]);
 
 
 
@@ -34,7 +38,7 @@ export default function Products() {
         // setProductsArray2(data?.data?.data)
         // // setProductsArray2(data?.data.data)
         // console.log(data?.data?.data)
-        getAllProducts()
+        getAllProducts(1)
     }, [])
 
 
@@ -55,11 +59,18 @@ export default function Products() {
 
 
 
-    async function getAllProducts() {
-        await axios.get('https://ecommerce.routemisr.com/api/v1/products')
+    async function getAllProducts(pageNum, pageLimit) {
+        await axios.get('https://ecommerce.routemisr.com/api/v1/products', {
+            params: {
+                page: pageNum,
+                limit: pageLimit
+            }
+        })
             .then((response) => {
                 setProductList(response.data.data)
                 setProductsArray2(response.data.data)
+                console.log(response.data);
+                setTotalNumOfPages(response.data.metadata.numberOfPages)
             })
             .catch((error) => {
                 console.log(error);
@@ -135,6 +146,13 @@ export default function Products() {
         }
     }
 
+    const handlePageChange = (data) => {
+
+        const currentPage = data.selected + 1
+        console.log(currentPage);
+        getAllProducts(currentPage)
+    }
+
 
     useEffect(() => {
         showWhishlist()
@@ -145,15 +163,14 @@ export default function Products() {
 
 
     return <section id='products' className=''>
-        <div className="container position-relative">
+        <div className="container position-relative pb-3">
 
 
-            <div className="row gy-4 mb-4">
+            <div className="row gy-4">
                 <input type="text" onChange={(e) => { search(e) }} placeholder='Search Products...' className='form-control' name="" id="" />
 
 
                 {productList?.map(function (product, idx) {
-                    { console.log(product) }
 
                     return <div key={idx} className="col-6 col-sm-4 col-md-3 col-lg-2 product"  >
 
@@ -185,6 +202,9 @@ export default function Products() {
                 })}
 
             </div>
+
+            <Pagination handlePageChange={handlePageChange}
+                totalNumOfPages={totalNumOfPages} />
         </div>
     </section>
 

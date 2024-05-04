@@ -1,6 +1,7 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { ColorRing } from 'react-loader-spinner'
+import { Link } from 'react-router-dom'
 
 export default function Categories() {
 
@@ -34,12 +35,13 @@ export default function Categories() {
       <div className="row gy-3">
 
         {cate?.map((category) => {
-          return <div className="col-md-4">
+          return <Link to={`/categoryProducts/${category._id}`} className="col-sm-6 col-md-4">
+            {console.log(category)}
             <div className='border border-2 borde rounded-3'>
               <img src={category.image} className='w-100' height={'400px'} alt="kb9" />
-              <h2 className='text-center p-4 text-success' >{category.name}</h2>
+              <h3 className='text-center p-4 text-success' >{category.name}</h3>
             </div>
-          </div>
+          </Link>
         })}
 
 

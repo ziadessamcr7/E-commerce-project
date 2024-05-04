@@ -5,6 +5,7 @@ import { ColorRing, RotatingLines } from 'react-loader-spinner'
 import { useQuery } from 'react-query'
 import { useParams } from 'react-router-dom'
 import { cartContext } from '../Context/CartContext'
+import Slider from 'react-slick'
 
 export default function ProductDetails() {
 
@@ -24,7 +25,11 @@ export default function ProductDetails() {
     const { data } = await axios.get(`https://ecommerce.routemisr.com/api/v1/products/${id}`)
     setProductDetails(data.data)
 
+
+    console.log(data);
+
   }
+
 
 
   useEffect(function () {
@@ -62,6 +67,16 @@ export default function ProductDetails() {
   //   return <h1>LOADING.....</h1>
   // }
 
+  const settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+  };
+
+
 
 
 
@@ -72,7 +87,15 @@ export default function ProductDetails() {
       <div className="row d-flex align-items-center py-5">
         <div className="col-md-4 bg-success-subtle py-3">
           <div>
-            <img src={productDetails.imageCover} className='w-100' alt="kb9" />
+            <Slider {...settings}>
+
+              {productDetails?.images?.map(function (img, idx) {
+                return <div key={idx}>
+                  <img className='w-100' src={img} alt="prodImg" />
+                </div>
+              })}
+
+            </Slider>
           </div>
         </div>
         <div className="col-md-7 m-auto ">
