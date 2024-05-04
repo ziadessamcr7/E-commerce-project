@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/e-commerce-login/static/css/main.93ffc01b.css",
-    "main.js": "/e-commerce-login/static/js/main.6b03da4c.js",
+    "main.css": "/e-commerce-login/static/css/main.95c080de.css",
+    "main.js": "/e-commerce-login/static/js/main.f356ae3a.js",
     "static/js/787.ac34fb11.chunk.js": "/e-commerce-login/static/js/787.ac34fb11.chunk.js",
     "static/media/rm222-mind-34.webp": "/e-commerce-login/static/media/rm222-mind-34.6298d9e6e6cbefc9473b.webp",
     "static/media/s960_Groceries.jng.jpg": "/e-commerce-login/static/media/s960_Groceries.jng.686af774efe65913b654.jpg",
@@ -16,6 +16,7 @@
     "static/media/fa-brands-400.woff2": "/e-commerce-login/static/media/fa-brands-400.878f31251d960bd6266f.woff2",
     "static/media/fa-regular-400.ttf": "/e-commerce-login/static/media/fa-regular-400.50701fbb8177c2dde530.ttf",
     "static/media/blog-large.png": "/e-commerce-login/static/media/blog-large.e91d9c5941453161adb2.png",
+    "static/media/no-product-found-f64bec64.webp": "/e-commerce-login/static/media/no-product-found-f64bec64.586b20ff4a41075a2c4e.webp",
     "static/media/fa-regular-400.woff2": "/e-commerce-login/static/media/fa-regular-400.b041b1fa4fe241b23445.woff2",
     "static/media/payment2.png": "/e-commerce-login/static/media/payment2.50f15cd272b89bd34f96.png",
     "static/media/freshcart-logo.svg": "/e-commerce-login/static/media/freshcart-logo.53f7a424c3aedc30a0fb46dc2278137c.svg",
@@ -26,12 +27,12 @@
     "static/media/slick.ttf": "/e-commerce-login/static/media/slick.c94f7671dcc99dce43e2.ttf",
     "static/media/slick.woff": "/e-commerce-login/static/media/slick.295183786cd8a1389865.woff",
     "index.html": "/e-commerce-login/index.html",
-    "main.93ffc01b.css.map": "/e-commerce-login/static/css/main.93ffc01b.css.map",
-    "main.6b03da4c.js.map": "/e-commerce-login/static/js/main.6b03da4c.js.map",
+    "main.95c080de.css.map": "/e-commerce-login/static/css/main.95c080de.css.map",
+    "main.f356ae3a.js.map": "/e-commerce-login/static/js/main.f356ae3a.js.map",
     "787.ac34fb11.chunk.js.map": "/e-commerce-login/static/js/787.ac34fb11.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.93ffc01b.css",
-    "static/js/main.6b03da4c.js"
+    "static/css/main.95c080de.css",
+    "static/js/main.f356ae3a.js"
   ]
 }
