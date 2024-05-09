@@ -97,75 +97,79 @@ export default function Login() {
 
 
   return (
-    <section id="login" className="background">
+    <section id="login" className="background container-fluid">
       {errorMsg ? (
-        <div className=" w-50 m-auto my-2 alert alert-danger"> {errorMsg} </div>
+        <div className=" w-75 m-auto my-2 alert alert-danger"> {errorMsg} </div>
       ) : (
         ""
       )}
 
       {success ? (
-        <div className=" w-50 m-auto my-2 alert alert-success"> {success} </div>
+        <div className=" w-75 m-auto my-2 alert alert-success"> {success} </div>
       ) : (
         ""
       )}
 
-      <h1 className="text-center text-white">Login Now </h1>
-
-      <form className="w-50 bg-success-subtle p-4 rounded-4 text-dark m-auto" onSubmit={formik.handleSubmit}>
-        <label htmlFor="email" className="" >Email:</label>
-        <input
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.email}
-          type="email"
-          className="form-control mb-3"
-          id="email"
-          name="email"
-          defaultValue={'zoz@mail.com'}
-        />
-        {formik.errors.email && formik.touched.email ? (
-          <div className="alert alert-danger">{formik.errors.email}</div>
-        ) : (
-          ""
-        )}
-
-        <label htmlFor="pass" className="">Password:</label>
-        <input
-          onBlur={formik.handleBlur}
-          onChange={formik.handleChange}
-          value={formik.values.password}
-          type="password"
-          className="form-control mb-3"
-          id="password"
-          name="password"
-          defaultValue={'123456'}
-        />
-        {formik.errors.password && formik.touched.password ? (
-          <div className="alert alert-danger">{formik.errors.password}</div>
-        ) : (
-          ""
-        )}
-
-        <h6> <Link className="" to={'/forgetpassword'}> Forgot Password? </Link> </h6>
-
-        <button type="submit" className="btn d-flex justify-content-center btn-success px-4 mt-3 ms-auto">
-          {Loading === false ? (
-            <span className="fw-bold">Login</span>
-          ) : (
-            <TailSpin
-              height="30"
-              width="30"
-              color="#ffff"
-              ariaLabel="tail-spin-loading"
-              radius="3"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
+      <h1 className="text-center text-white">Sign in </h1>
+      <div className="row justify-content-center">
+        <div className="col-12 col-sm-10 col-md-8 col-lg-6">
+          <form className="bg-success-subtle p-4 rounded-4 text-dark m-auto" onSubmit={formik.handleSubmit}>
+            <label htmlFor="email" className="" >Email:</label>
+            <input
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.email}
+              type="email"
+              className="form-control mb-3"
+              id="email"
+              name="email"
+              defaultValue={'zoz@mail.com'}
             />
-          )}
-        </button>
-      </form>
+            {formik.errors.email && formik.touched.email ? (
+              <div className="alert alert-danger">{formik.errors.email}</div>
+            ) : (
+              ""
+            )}
+
+            <label htmlFor="pass" className="">Password:</label>
+            <input
+              onBlur={formik.handleBlur}
+              onChange={formik.handleChange}
+              value={formik.values.password}
+              type="password"
+              className="form-control mb-3"
+              id="password"
+              name="password"
+              defaultValue={'123456'}
+            />
+            {formik.errors.password && formik.touched.password ? (
+              <div className="alert alert-danger">{formik.errors.password}</div>
+            ) : (
+              ""
+            )}
+
+            <h6> <Link className="" to={'/forgetpassword'}> Forgot Password? </Link> </h6>
+
+            <button type="submit" className="btn d-flex justify-content-center btn-success px-4 mt-3 ms-auto">
+              {Loading === false ? (
+                <span className="fw-bold">Login</span>
+              ) : (
+                <TailSpin
+                  height="30"
+                  width="30"
+                  color="#ffff"
+                  ariaLabel="tail-spin-loading"
+                  radius="3"
+                  wrapperStyle={{}}
+                  wrapperClass=""
+                  visible={true}
+                />
+              )}
+            </button>
+          </form>
+        </div>
+      </div>
+
     </section>
   );
 }

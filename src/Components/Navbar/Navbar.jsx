@@ -139,6 +139,15 @@ export default function Navbar() {
                     <NavLink
                       className="nav-link position-relative"
                       aria-current="page"
+                      to="allorders"
+                    >
+                      My orders
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink
+                      className="nav-link position-relative"
+                      aria-current="page"
                       to="cart"
                     >
                       <i class="fa-solid fa-cart-shopping fa-lg"></i>

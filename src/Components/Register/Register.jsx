@@ -102,7 +102,7 @@ export default function Register() {
 
 
 
-    <h1 className='text-center text-white mb-1'>Register Now </h1>
+    <h1 className='text-center text-white mb-1'>Sign Up </h1>
 
     <form className='w-50 m-auto bg-success-subtle p-4 rounded-4' onSubmit={formik.handleSubmit}>
 

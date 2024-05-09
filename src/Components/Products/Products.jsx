@@ -63,7 +63,7 @@ export default function Products() {
         await axios.get('https://ecommerce.routemisr.com/api/v1/products', {
             params: {
                 page: pageNum,
-                limit: pageLimit
+                limit: 42
             }
         })
             .then((response) => {
@@ -98,7 +98,6 @@ export default function Products() {
         }
 
     }
-
 
 
     function search(e) {
@@ -207,10 +206,5 @@ export default function Products() {
                 totalNumOfPages={totalNumOfPages} />
         </div>
     </section>
-
-
-
-
-
 
 }

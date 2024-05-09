@@ -14,9 +14,9 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
-  height: 100vh;
   background-color: rgba(69, 88, 95, 0.9);
   background-blend-mode: overlay;
+  min-height: 100vh;
 }
 
 
@@ -168,6 +168,8 @@ a:hover {
   padding-top: 80px;
 }
 
+#register {}
+
 #loading-layer {
   background-color: rgba(255, 255, 255, 0.7);
   position: absolute;
@@ -212,4 +214,14 @@ body {
 .active>.page-link,
 .page-link.active {
   background-color: #0aad0a;
+}
+
+
+
+/* // Small devices (landscape phones, 576px and up) */
+@media (max-width: 767px) {
+  .checkoutBtn {
+    display: block !important;
+  }
+
 }
