@@ -93,68 +93,68 @@ export default function Register() {
   })
 
 
-  return <section id='register' className='background'>
+  return <section id='register' className='background container-fluid'>
 
 
-    {errorMsg ? <div className=" w-75 m-auto my-2 alert alert-danger"> {errorMsg} </div> : ''}
+    {errorMsg ? <div className=" w-50 m-auto my-2 alert alert-danger"> {errorMsg} </div> : ''}
 
-    {success ? <div className=" w-75 m-auto my-2 alert alert-success"> {success} </div> : ''}
+    {success ? <div className=" w-50 m-auto my-2 alert alert-success"> {success} </div> : ''}
+
+    <div className="row justify-content-center">
+      <div className='col-12 col-sm-10 col-md-8 col-lg-6'>
+        <h1 className='text-center text-white mb-1'>Sign Up </h1>
+
+        <form className='bg-success-subtle p-4 rounded-4' onSubmit={formik.handleSubmit}>
+          <label htmlFor="name">Name:</label>
+          <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} type="text" className='form-control ' id='name' name='name' />
+          {formik.errors.name && formik.touched.name ? <div className='text-danger mb-2'>{formik.errors.name}</div> : ''}
+
+          <label htmlFor="mail" className='mt-2'>Email:</label>
+          <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} type="email" className='form-control' id='mail' name='email' />
+          {formik.errors.email && formik.touched.email ? <div className='text-danger mb-2'>{formik.errors.email}</div> : ''}
+
+          <label htmlFor="phone" className='mt-2'>Phone:</label>
+          <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.phone} type="tel" className='form-control' id='phone' name='phone' />
+          {formik.errors.phone && formik.touched.phone ? <div className='text-danger mb-2'>{formik.errors.phone}</div> : ''}
+
+          <div className="row">
+            <div className="col-md-6">
+              <label htmlFor="pass" className='mt-2'>Password:</label>
+              <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} type="password" className='form-control' id='password' name='password' />
+              {formik.errors.password && formik.touched.password ? <div className='text-danger mb-2'>{formik.errors.password}</div> : ''}
+            </div>
+            <div className="col-md-6">
+              <label htmlFor="rePass" className='mt-2'>Confirm Password:</label>
+              <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.rePassword} type="password" className='form-control' id='rePassword' name='rePassword' />
+              {formik.errors.rePassword && formik.touched.rePassword ? <div className='text-danger mb-2'>{formik.errors.rePassword}</div> : ''}
+            </div>
+          </div>
 
 
 
-    <h1 className='text-center text-white mb-1'>Sign Up </h1>
 
-    <form className='w-50 m-auto bg-success-subtle p-4 rounded-4' onSubmit={formik.handleSubmit}>
 
-      <div className="row">
+          <button type='submit' className='btn btn-success mt-3 ms-auto d-block'>
+
+            {Loading === false ? <span className='fw-bold'>Register</span> : <TailSpin
+              height="30"
+              width="30"
+              color="#ffff"
+              ariaLabel="tail-spin-loading"
+              radius="1"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />}
+
+          </button>
+
+
+        </form>
 
       </div>
-      <label htmlFor="name">Name:</label>
-      <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.name} type="text" className='form-control ' id='name' name='name' />
-      {formik.errors.name && formik.touched.name ? <div className='text-danger mb-2'>{formik.errors.name}</div> : ''}
+    </div>
 
-      <label htmlFor="mail" className='mt-2'>Email:</label>
-      <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.email} type="email" className='form-control' id='mail' name='email' />
-      {formik.errors.email && formik.touched.email ? <div className='text-danger mb-2'>{formik.errors.email}</div> : ''}
-
-      <label htmlFor="phone" className='mt-2'>Phone:</label>
-      <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.phone} type="tel" className='form-control' id='phone' name='phone' />
-      {formik.errors.phone && formik.touched.phone ? <div className='text-danger mb-2'>{formik.errors.phone}</div> : ''}
-
-      <div className="row">
-        <div className="col-md-6">
-          <label htmlFor="pass" className='mt-2'>Password:</label>
-          <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.password} type="password" className='form-control' id='password' name='password' />
-          {formik.errors.password && formik.touched.password ? <div className='text-danger mb-2'>{formik.errors.password}</div> : ''}
-        </div>
-        <div className="col-md-6">
-          <label htmlFor="rePass" className='mt-2'>Confirm Password:</label>
-          <input onBlur={formik.handleBlur} onChange={formik.handleChange} value={formik.values.rePassword} type="password" className='form-control' id='rePassword' name='rePassword' />
-          {formik.errors.rePassword && formik.touched.rePassword ? <div className='text-danger mb-2'>{formik.errors.rePassword}</div> : ''}
-        </div>
-      </div>
-
-
-
-
-
-      <button type='submit' className='btn btn-success mt-3 ms-auto d-block'>
-
-        {Loading === false ? <span className='fw-bold'>Register</span> : <TailSpin
-          height="30"
-          width="30"
-          color="#ffff"
-          ariaLabel="tail-spin-loading"
-          radius="1"
-          wrapperStyle={{}}
-          wrapperClass=""
-          visible={true}
-        />}
-
-      </button>
-
-
-    </form>
 
 
   </section>
